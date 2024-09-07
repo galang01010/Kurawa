@@ -1,0 +1,14 @@
+#!/bin/bash
+# //====================================================
+# //  Sabdo Palon Store - Since 2023
+# //====================================================
+# //  System Request : Debian 9+/Ubuntu 18.04+/20+
+# //  Author         : Sabdopalonstore
+# //  Develop        : Sabdo Palon Store
+# //  email          : Sabdopalonstore@gmail.com
+# //  telegram       : t.me/Sabdopalonstore
+# //====================================================
+
+REPO="https://raw.githubusercontent.com/galang01010/Kurawa/main/"
+
+wget -O /root/.config/rclone/rclone.conf "${REPO}Cfg/rclone.conf"

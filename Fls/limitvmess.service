@@ -1,0 +1,23 @@
+#!/bin/bash
+# //====================================================
+# //  Sabdo Palon Store - Since 2023
+# //====================================================
+# //  System Request : Debian 9+/Ubuntu 18.04+/20+
+# //  Author         : Sabdopalonstore
+# //  Develop        : Sabdo Palon Store
+# //  email          : Sabdopalonstore@gmail.com
+# //  telegram       : t.me/Sabdopalonstore
+# //====================================================
+
+[Unit]
+Description=Limit Usage Xray Service
+Documentation=FighterTunnel
+After=syslog.target network-online.target
+
+[Service]
+User=root
+NoNewPrivileges=true
+ExecStart=/etc/xray/limit.vmess
+
+[Install]
+WantedBy=multi-user.target

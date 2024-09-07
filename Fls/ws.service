@@ -1,0 +1,27 @@
+#!/bin/bash
+# //====================================================
+# //  Sabdo Palon Store - Since 2023
+# //====================================================
+# //  System Request : Debian 9+/Ubuntu 18.04+/20+
+# //  Author         : Sabdopalonstore
+# //  Develop        : Sabdo Palon Store
+# //  email          : Sabdopalonstore@gmail.com
+# //  telegram       : t.me/Sabdopalonstore
+# //====================================================
+
+[Unit]
+Description=WebSocket
+Documentation=https://github.com/jaka1m
+After=syslog.target network-online.target
+
+[Service]
+User=root
+NoNewPrivileges=true
+ExecStart=/usr/bin/ws -f /usr/bin/tun.conf
+Restart=on-failure
+RestartPreventExitStatus=23
+LimitNPROC=10000
+LimitNOFILE=1000000
+
+[Install]
+WantedBy=multi-user.target
