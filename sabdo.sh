@@ -587,15 +587,42 @@ systemctl restart ssh
 print_success "SSHD"
 }
 clear
-function ins_dropbear(){
-clear
-print_install "Menginstall Dropbear"
-apt-get install dropbear -y > /dev/null 2>&1
-wget -q -O /etc/default/dropbear "${REPO}Cfg/dropbear.conf"
-chmod +x /etc/default/dropbear
-/etc/init.d/dropbear restart
-/etc/init.d/dropbear status
-print_success "Dropbear"
+function ins_dropbear() {
+    clear
+    print_install "Installing Dropbear"
+
+    # Install Dropbear
+    if apt-get install dropbear -y > /dev/null 2>&1; then
+        echo "Dropbear installed successfully."
+    else
+        echo "Error installing Dropbear. Exiting."
+        exit 1
+    fi
+
+    # Download Dropbear configuration
+    if wget -q -O /etc/default/dropbear "${REPO}Cfg/dropbear.conf"; then
+        echo "Configuration file downloaded successfully."
+    else
+        echo "Error downloading configuration file. Exiting."
+        exit 1
+    fi
+
+    # Ensure the configuration file is readable by Dropbear
+    chmod 644 /etc/default/dropbear
+
+    # Restart Dropbear service using systemctl
+    if systemctl restart dropbear.service > /dev/null 2>&1; then
+        echo "Dropbear service restarted."
+    else
+        echo "Error restarting Dropbear service. Exiting."
+        exit 1
+    fi
+
+    # Check Dropbear service status
+    systemctl status dropbear.service
+
+    # Print success message
+    print_success "Dropbear"
 }
 clear
 function ins_vnstat(){
